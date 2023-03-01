@@ -22,9 +22,13 @@ A suite of tools related to randomly picking students in various ways from a sin
   - [x] Info button that opens a modal with 
     - [x] links to the Github  
     - [x] a little about me
-- Shuffle Class Tool
-  - [ ] (?) Dropdown to set the place of a student
-  - [ ] Checkboxes to set First or Last for specific student
+- Tools
+  - [ ] Shuffle Class Tool
+    - [ ] (?) Dropdown to set the place of a student
+    - [ ] Checkboxes to set First or Last for specific student
+  - [x] Random Picker
+  - [ ] Random Groups
+    - [ ] *HAVE TO START*
 - Class Settings
   - [x] Ability to change the class name
   - [x] Ability to change the class icon
