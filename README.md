@@ -1,4 +1,4 @@
-# [Various Classroom Tools](https://mikitz.github.io/various-classroom-tools/index.html)
+# [Various Classroom Tools](https://mjf1406.github.io/various-classroom-tools/index.html)
 A suite of tools related to randomly picking students in various ways from a single class. This is meant for the teacher only and is not intended to be shared with parents or students.
 
 ## Tools
@@ -22,21 +22,18 @@ A suite of tools related to randomly picking students in various ways from a sin
   - [x] Info button that opens a modal with 
     - [x] links to the Github  
     - [x] a little about me
-- Tools
-  - [ ] Shuffle Class Tool
-    - [ ] (?) Dropdown to set the place of a student
-    - [ ] Checkboxes to set First or Last for specific student
-  - [x] Random Picker
-  - [ ] Random Groups
-    - [ ] *HAVE TO START*
+- Shuffle Class Tool
+  - [x] Checkboxes to set First or Last for specific student
+  - [ ] (?) Dropdown to set the place of a student
+  - [x] Prevent the same student being selected as first and last
 - Class Settings
   - [x] Ability to change the class name
   - [x] Ability to change the class icon
   - [ ] (?) Add an undo button
   - [ ] (?) Set class to defaults?
 - Add Class
-  - [ ] Prevent duplicate names
-  - [ ] Prevent duplicate icons
+  - [x] Prevent duplicate names
+  - [x] Prevent duplicate icons
 - Theme Switcher
   - [ ] Light Theme
   - [ ] Dark Theme
