@@ -1,0 +1,138 @@
+:root {
+    --max-width: 750px;
+    --tertiary: lightblue;
+}
+* {
+    font-family: 'Quicksand', sans-serif;
+}
+body {
+    margin: 0 auto;
+    max-width: var(--max-width);
+}
+main {
+    padding: 10px;
+}
+#modal-display-add-class {
+    float: right;
+    top: 0;
+}
+#modal-display-about {
+    float: right;
+    top: 0;
+    margin-right: 5px;
+}
+#alert-display {
+    padding: 10px;
+}
+.navs {
+    position: fixed;
+    bottom: 0;
+    max-width: var(--max-width);
+    width: 100%;
+}
+.class-nav {
+    overflow-x: scroll;
+    padding: 10px;
+    background: var(--tertiary);
+}
+.tools-nav {
+    overflow-x: scroll;
+    padding: 10px;
+    background-color: var(--tertiary);
+    /* border-width: 15px;
+    border-style: solid;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    border-image: 
+        linear-gradient(
+            to bottom,
+            white,
+            rgba(0,0,0,0)
+        ) 100% 0 0 0/15px 0 0 0 stretch; */
+}
+.btn-class {
+    margin: 5px;
+}
+#input-icon {
+    font-family: 'FontAwesome', 'sans-serif';
+}
+#tool-display {
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    overflow-y: scroll;
+    margin-bottom: 185px;
+}
+#display-class-name {
+    display:flex;
+    justify-content: center;
+}
+#action-buttons {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+}
+#action-buttons button {
+    width: 150px;
+    margin: 5px;
+}
+#tool-header {
+    display:flex;
+    justify-content: center;
+}
+.selected-student {
+    background-color: rgb(232, 232, 232);
+}
+.list-group {
+    justify-content: center !important;
+}
+.list-group-item {
+    padding: 4px !important;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    /* max-width: 50%; */
+    font-size: small;
+}
+span[name="shuffle-badge"]{
+    float: right;
+}
+.last {
+    background-color: red;
+}
+.text-input-small {
+    font-size: small;
+    max-width: 65px;
+    /* border-radius: 5px; */
+    border: none;
+    border-bottom: var(--primary) 2px solid;
+    margin: 3px;
+}
+.fa-trash {
+    cursor: pointer;
+    color: red;
+}
+.fa-solid {
+    cursor: pointer;
+}
+.fa-heart {
+    color: red;
+    animation: beat 0.75s infinite alternate;
+	transform-origin: center;
+}
+/* Heart beat animation 
+    Source: https://codepen.io/cjrh/pen/qEgbVw */
+@keyframes beat{
+	to { transform: scale(1.4); }
+}
+.btn-sm {
+    padding: 0.5px 4px 0.5px 4px;
+    font-size: smaller;
+}
+.first-last-buttons {
+    float: right;
+    margin-left: 5px;
+}

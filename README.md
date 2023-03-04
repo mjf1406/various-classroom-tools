@@ -1,4 +1,4 @@
-# [Various Classroom Tools](https://mjf1406.github.io/various-classroom-tools/index.html)
+# [Random Student Tools](https://mikitz.github.io/Random-Student-Tools/index.html)
 A suite of tools related to randomly picking students in various ways from a single class. This is meant for the teacher only and is not intended to be shared with parents or students.
 
 ## Tools
