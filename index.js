@@ -286,6 +286,7 @@ function saveClass(className){
     const toolName = (document.getElementById('tool-header').innerHTML).replaceAll('<h2>','').replaceAll('</h2>','')
     setupToolDisplay(toolName)
     updateClassNav()
+    setupClassButtonListeners()
     displayAlert('success', '<i class="fa-solid fa-circle-check"></i> &nbsp; <strong>What a change!</strong> Class successfully modified.', null)
     document.getElementById(`button-class-${inputClassName}`).classList.add('active') // Set this class as active in the class nav
 }
