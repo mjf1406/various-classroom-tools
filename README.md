@@ -1,4 +1,4 @@
-# [Various Classroom Tools](https://mjf1406.github.io/various-classroom-tools/index.html)
+# [Random Student Tools](https://mikitz.github.io/Random-Student-Tools/index.html)
 A suite of tools related to randomly picking students in various ways from a single class. This is meant for the teacher only and is not intended to be shared with parents or students.
 
 ## Tools
@@ -17,11 +17,6 @@ A suite of tools related to randomly picking students in various ways from a sin
 
 ## To-do List
 *(?) denotes an item I am considering.*
-- UI
-  - [x] Find a new color for the class list and tool backgrounds
-  - [x] Info button that opens a modal with 
-    - [x] links to the Github  
-    - [x] a little about me
 - Shuffle Class Tool
   - [x] Checkboxes to set First or Last for specific student
   - [ ] (?) Dropdown to set the place of a student
@@ -31,9 +26,11 @@ A suite of tools related to randomly picking students in various ways from a sin
   - [x] Ability to change the class icon
   - [ ] (?) Add an undo button
   - [ ] (?) Set class to defaults?
-- Add Class
-  - [x] Prevent duplicate names
-  - [x] Prevent duplicate icons
+- Random Groups
+  - (?) I do not have a use for this currently.
+- Add Note
+  - (?) I do not have a use for this currently.
+  - https://flatpickr.js.org/examples/
 - Theme Switcher
   - [ ] Light Theme
   - [ ] Dark Theme

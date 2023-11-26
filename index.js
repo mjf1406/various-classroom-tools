@@ -18,9 +18,11 @@ function setupPage() {
 
     const buttonRunTool = document.getElementById('button-run-tool')
     buttonRunTool.addEventListener('click', function () {
+        const modalAddNote = document.getElementById('modal-add-note')
         let toolName = document.getElementById('tool-header').innerHTML
         if (toolName.includes('random-student')) return randomStudent()
         if (toolName.includes('shuffle-class')) return shuffleClassList()
+        if (toolName.includes('notes')) return $('#modal-add-note').modal('toggle') // Open the modal
     })
 
     const buttonResetFlags = document.getElementById('button-reset-flags')
@@ -96,6 +98,7 @@ function setupPage() {
         document.getElementById('display-class-name').innerHTML = `<h2>${activeClass}</h2>`
         setupToolDisplay('random-student') // Populate the Tool UI
         setupSettingsModal(activeClass)
+        setupAddNoteModal(activeClass)
     }
 }
 function addClass(className, classroom, gradeLevel, students){
@@ -142,9 +145,44 @@ function setupLocalStorage(){
     if (localStorage.getItem('RST-classes')) return
     localStorage.setItem('RST-classes', '[]')
 }
-// ==========================
-//         Settings
-// ==========================
+// ========= Add Note =========
+function setupAddNoteModal(className){
+    const classData = JSON.parse(localStorage.getItem('RST-classes')).find(e => e.CLASS_NAME == className)
+   
+    const settingsLabel = document.getElementById('add-note-label')
+    settingsLabel.innerText = `${className}`
+
+    const inputClassName = document.getElementById('input-class-name-settings')
+    inputClassName.value = className
+
+    const divStudentCheckboxes = document.getElementById('student-checkboxes')
+    divStudentCheckboxes.innerHTML = ''
+    const students = classData.STUDENTS
+    for (let index = 0; index < students.length; index++) {
+        const element = students[index];    
+        
+        const div = document.createElement('div')
+        const input = document.createElement('input')
+        const label = document.createElement('label')
+
+        div.classList.add('form-check')
+        div.classList.add('form-check-inline')
+        input.classList.add('form-check-input')
+        label.classList.add('form-check-label')
+
+        input.type = 'checkbox'
+        input.id = `add-note-checkbox-${element.ID}`
+        input.value = element.ID
+
+        label.htmlFor = `add-note-checkbox-${element.ID}`
+        label.innerText = `${element.FIRST_NAME} ${element.LAST_NAME}`
+
+        div.appendChild(input)
+        div.appendChild(label)
+        divStudentCheckboxes.appendChild(div)
+    }
+}
+// ========= Settings =========
 function setupSettingsModal(className){
     const classData = JSON.parse(localStorage.getItem('RST-classes')).find(e => e.CLASS_NAME == className)
 
@@ -337,6 +375,7 @@ function setupClassButtonListeners(){
             const toolName = (document.getElementById('tool-header').innerHTML).replaceAll('<h5>','').replaceAll('</h5>','')
             setupToolDisplay(toolName)
             setupSettingsModal(className)
+            setupAddNoteModal(className)
             localStorage.setItem('RST-active-class', className)
         })
     }
@@ -392,9 +431,7 @@ function addStudent(){
     li.appendChild(div)
     studentList.appendChild(li)
 }
-// ==========================
-//         Tools
-// ==========================
+// ========= Tools =========
 function randomStudent(){
     let className = document.getElementById('display-class-name').innerHTML
     className = className.replace("<h2>", "").replace("</h2>", "")
@@ -410,7 +447,7 @@ function randomStudent(){
     classes[classIndex] = classData
     localStorage.setItem('RST-classes', JSON.stringify(classes))
 
-    setupToolDisplay('random-student')
+    setupToolDisplay('random-student', undefined, undefined, true)
 }
 function shuffleClassList(){
     let className = document.getElementById('display-class-name').innerHTML
@@ -441,14 +478,15 @@ function shuffleClassList(){
     classes[classIndex] = classData
     localStorage.setItem('RST-classes', JSON.stringify(classes))
 
-    setupToolDisplay('shuffle-class', firstStudentId, lastStudentId)
+    setupToolDisplay('shuffle-class', firstStudentId, lastStudentId, true)
 }
 function randomGroups(classData, groupCount) {
 
 }
-// ==========================
-//         Utilities
-// ==========================
+function addNote() {
+
+}
+// ========= Utilities =========
 const transformData = (data) => {
     function parseStudents(data, parser, finalData) {
         for (let index = 0; index < data.length; index++) { // Loop through each line of the students
@@ -543,7 +581,9 @@ function updateClassNav(){
         navClasses.appendChild(button)
     }
 }
-function setupToolDisplay(toolName, firstStudentId, lastStudentId) {
+async function setupToolDisplay(toolName, firstStudentId, lastStudentId, buttonClicked) {
+    const buttonRunTool = document.getElementById('button-run-tool')
+
     const toolDisplay = document.getElementById('tool-display')
     toolDisplay.innerHTML = ''
     const toolHeader = document.getElementById('tool-header')
@@ -560,8 +600,10 @@ function setupToolDisplay(toolName, firstStudentId, lastStudentId) {
     if (className == "Select a Class...") return 
     // Random Student Tool
     if (toolName == 'random-student') {
+        buttonRunTool.innerHTML = 'Pick'
         const ul = document.createElement('ul')
         ul.classList.add('list-group')
+        toolDisplay.appendChild(ul)
         for (let index = 0; index < classData.STUDENTS.length; index++) {
             const element = classData.STUDENTS[index];
             const li = document.createElement('li')
@@ -570,20 +612,21 @@ function setupToolDisplay(toolName, firstStudentId, lastStudentId) {
             li.style.display = 'flex'
             if (element.FLAGS.RANDOM == 1) li.classList.add('selected-student')
             ul.appendChild(li)
+            // if (buttonClicked) await sleep(200)
         }
-        toolDisplay.appendChild(ul)
     } 
     // Shuffle Tool
     else if (toolName == 'shuffle-class') { 
+        buttonRunTool.innerHTML = 'Sort'
         const ul = document.createElement('ul')
         ul.classList.add('list-group')
+        toolDisplay.appendChild(ul)
         for (let index = 0; index < classData.STUDENTS.length; index++) {
             const element = classData.STUDENTS[index];
             const li = document.createElement('li')
             li.classList.add('list-group-item')
             li.innerText = `${index + 1}.) ${element.FIRST_NAME} ${element.LAST_NAME} (${element.NICKNAME})`
             li.style.display = 'inline'
-
             const span = document.createElement('span')
             span.id = `${element.ID}-position`
             span.classList.add('first-last-buttons')
@@ -599,6 +642,7 @@ function setupToolDisplay(toolName, firstStudentId, lastStudentId) {
             if (element.FLAGS.SHUFFLE.FIRST >= 1) li.innerHTML += `&nbsp; <span class="badge badge-primary badge-pill" name="shuffle-badge">F${element.FLAGS.SHUFFLE.FIRST}</span>`
             if (element.FLAGS.SHUFFLE.LAST >= 1) li.innerHTML += `&nbsp; <span class="badge badge-primary badge-pill last" name="shuffle-badge">L${element.FLAGS.SHUFFLE.LAST}</span>`
             ul.appendChild(li)
+            if (buttonClicked) await sleep(200)
         }
         toolDisplay.appendChild(ul)
 
@@ -640,7 +684,11 @@ function setupToolDisplay(toolName, firstStudentId, lastStudentId) {
     } 
     // Random Groups Tool
     else if (toolName == 'random-groups') { 
-        console.log(toolName)
+        buttonRunTool.innerHTML = 'Randomize'
+    }
+    // Add Note
+    else if (toolName == 'notes') {
+        buttonRunTool.innerHTML = 'Add Note'
     }
 }
 function displayAlert(alertType, innerHTML, element){
@@ -705,4 +753,7 @@ function alertDuplicateNameOrIcon(className, classIcon){
     else if (classNames.includes(className)) duplicates = 'name'
     else if (classIcons.includes(classIcon)) duplicates = 'icon'
     return duplicates
+}
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }

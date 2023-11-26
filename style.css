@@ -1,6 +1,7 @@
 :root {
     --max-width: 750px;
     --tertiary: lightblue;
+    --transition-random: all ease 1s;
 }
 * {
     font-family: 'Quicksand', sans-serif;
@@ -64,6 +65,7 @@ main {
     justify-content: center;
     overflow-y: scroll;
     margin-bottom: 185px;
+    transition: var(--transition-random);
 }
 #display-class-name {
     display:flex;
@@ -85,9 +87,12 @@ main {
 }
 .selected-student {
     background-color: rgb(232, 232, 232);
+    animation: fadeIn;
+    visibility: visible;
 }
 .list-group {
     justify-content: center !important;
+    transition: var(--transition-random);
 }
 .list-group-item {
     padding: 4px !important;
@@ -96,6 +101,7 @@ main {
     vertical-align: middle;
     /* max-width: 50%; */
     font-size: small;
+    transition: background-color ease 1s;
 }
 span[name="shuffle-badge"]{
     float: right;
@@ -135,4 +141,13 @@ span[name="shuffle-badge"]{
 .first-last-buttons {
     float: right;
     margin-left: 5px;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes fadeOut {
+    100% { opacity: 1; }
+    0% { opacity: 0; }
 }
